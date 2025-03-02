@@ -1,0 +1,10 @@
+/*
+Backend: Ruby ⇒ PHP
+Backend Framework: Django ⇒ Node.js
+Frontend: JavaScript ⇒ TypeScript
+Frontend Framework/Toolkit: Bootstrap ⇒ Tailwind CSS
+Advanced Graphics: ThreeJS ⇒ BabylonJS
+Containerization: Docker ⇒ Containerd
+Database: PostgreSQL ⇒ SQLite
+Blockchain: Ethereum and Solidity ⇒ Avalanche and Solidity
+*/
