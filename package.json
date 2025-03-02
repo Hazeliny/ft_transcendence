@@ -1,0 +1,31 @@
+{
+  "name": "ft_transcendence",
+  "version": "1.0.0",
+  "description": "|  特性  | NestJS |  Django  |  Node.js  | |--------|--------|----------|-----------|\t\t\t |编程语言\t|TypeScript(基于 JavaScript)\t|Python\t                    |JavaScript               | |架构风格\t|MVC + 依赖注入(类似 Angular)    |MTV(Model-Template-View)   |自由(Express/Koa等框架)    | |性能\t    |🚀 高效，适合大规模应用\t|🐍 适中，适合快速开发\t|🚀 高并发，高性能    | |异步处理\t|✅ 内置支持（基于 Node.js）\t|❌ Python 默认同步（Django Channels 可实现异步）\t|✅ 原生异步（Event Loop） | |数据库支持\t|TypeORM、Prisma、Mongoose等\t|Django ORM（默认支持 PostgreSQL, MySQL, SQLite）\t|自由选择（Sequelize, Prisma等） | |适用场景\t|企业级后端、微服务、API\t|数据驱动应用、CMS、AI\t         |实时应用、API、微服务 | |WebSocket\t|✅ 内置支持（基于 Socket.io）\t|❌ 需 Django Channels 实现\t    |✅ 强大支持（Socket.io, ws） | |学习难度\t|⭐⭐⭐（中等，适合前端转后端）\t|⭐⭐（较简单，适合 Python 开发者）\t|⭐（简单，适合 JavaScript 开发者） | |扩展性\t    |🚀 高（模块化 & 依赖注入）\t      |🐢 中（Django 插件生态丰富）\t |🚀 最高（全自由，但需手动搭建） |",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hazeliny/ft_transcendence.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Hazeliny/ft_transcendence/issues"
+  },
+  "homepage": "https://github.com/Hazeliny/ft_transcendence#readme",
+  "dependencies": {
+    "@adminjs/express": "^6.1.1",
+    "@adminjs/sequelize": "^4.1.1",
+    "express": "^4.21.2",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0"
+  }
+}

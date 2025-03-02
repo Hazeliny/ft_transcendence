@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "ES6",                    // 编译目标为 ES6
+        "module": "commonjs",               // 使用 CommonJS 作为模块系统
+        "moduleResolution": "node",         // 解析模块时使用 Node.js 方式
+        "strict": true,                     // 启用严格模式
+        "esModuleInterop": true,            // 允许默认导入 CommonJS 模块
+        "forceConsistentCasingInFileNames": true, // 文件名大小写一致
+        "allowSyntheticDefaultImports": true, // 允许默认导入非 ES6 模块
+        "skipLibCheck": true,               // 跳过库类型检查，加快编译
+        "baseUrl": "./",                    // 以根目录为基准
+        "paths": {
+            "@adminjs/sequelize": ["node_modules/@adminjs/sequelize"]
+//            "*": ["node_modules/*"]
+        },
+        "outDir": "./dist",                 // 编译后的文件存放在 dist 目录
+        "rootDir": "./app/backend",             // 源代码在 backend 目录
+        "resolveJsonModule": true,          // 允许引入 JSON 文件
+        "sourceMap": true                  // 生成 source maps 方便调试
+    },
+    "include": ["app/backend/**/*.ts", "app/backend/authentication/types"],       // 只编译 backend 目录下的 TS 文件
+    "exclude": ["node_modules", "dist"]   // 排除 node_modules 和编译后的文件
+//    "exclude": ["node_modules", "dist", "public", "frontend/build"]
+}
