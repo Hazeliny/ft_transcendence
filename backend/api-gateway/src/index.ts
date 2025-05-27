@@ -23,10 +23,11 @@ const server = Fastify ({
 //register plugins
 async function registerPlugin() {
     await server.register(fastifyCors, {
-    //    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
-        origin: true,
-        methods: ['GET', 'POST'],
-        credentials: true
+        origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    //    origin: "*",
+//        methods: ['GET', 'POST', 'OPTIONS'],
+        credentials: true,
+        allowedHeaders: 'Content-Type,Authorization',
     })
     //JWT middleware
     await server.register(jwt)
@@ -47,7 +48,7 @@ async function start() {
         // print all the routes
         await server.ready()
         console.log(server.printRoutes())
-        server.listen({ port:8443 }, (err: Error, address: string) => {
+        server.listen({ port:8443, host: '0.0.0.0' }, (err: Error, address: string) => {
             if (err) {
                 server.log.error(err)
                 process.exit(1)
