@@ -1,12 +1,14 @@
 const db = require('better-sqlite3')('./users.db');
 
+// TODO make the id a "TEXT PRIMARY KEY UNIQUE", make all the corresponding changes in all the api.
 const init = db.prepare(`
     CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id TEXT PRIMARY KEY UNIQUE,
     username TEXT UNIQUE,
     password TEXT,
     nickname TEXT,
-    email TEXT UNIQUE)` 
+    email TEXT UNIQUE,
+    avatar TEXT DEFAULT '')` 
 );
 init.run();
 
@@ -17,7 +19,9 @@ function getUserByUsernameOrEmail(username, email) {
 
 function getUserByUsername(username) {
     const stmt = db.prepare('SELECT * FROM users WHERE username = ?');
-    return stmt.get(username);
+	const info = stmt.get(username);
+//	console.log(info);
+    return info;
 }
 
 function getNickname(nickname) {
@@ -30,10 +34,42 @@ function getUserById(id) {
     return stmt.get(id);
 }
 
-function createUser({ username, password, nickname, email }) {
-    const stmt = db.prepare('INSERT INTO users (username, password, nickname, email) VALUES (?, ?, ?, ?)');
-    const info = stmt.run(username, password, nickname, email);
-    return { id: info.lastInsertRowid, username };
+function createUser({ id, username, password, nickname, email }) {
+    const stmt = db.prepare('INSERT INTO users (id, username, password, nickname, email) VALUES (?, ?, ?, ?, ?)');
+    const info = stmt.run(id, username, password, nickname, email);
+	const stmt2 = db.prepare('SELECT * FROM users WHERE id = ?');
+	const info2 = stmt2.all(id);
+    return { id: info2[0].id, username };
+}
+
+function updateUser(userId, updates) {
+/*
+    const stmt = db.prepare(`
+        UPDATE users SET
+        username = ?,
+        nickname = ?,
+        email = ?,
+        password = ?,
+        avatar = ?
+        WHERE id = ?
+    `);
+    stmt.run(username, nickname, email, password, avatar || '', userId);
+*/
+    const fields = [];
+    const values = [];
+
+    for (const [key, value] of Object.entries(updates)) {
+        fields.push(`${key} = ?`);
+        values.push(value);
+    }
+    const sql = `UPDATE users SET ${fields.join(', ')} WHERE id = ?`;
+    const stmt = db.prepare(sql);
+    stmt.run(...values, userId);
+}
+
+function deleteUser(userId) {
+    const stmt = db.prepare('DELETE FROM users WHERE id = ?');
+    stmt.run(userId);
 }
 
 module.exports = {
@@ -41,5 +77,7 @@ module.exports = {
     getUserByUsername,
     getUserById,
     getNickname,
-    createUser
+    createUser,
+    updateUser,
+    deleteUser
 };
