@@ -8,6 +8,13 @@ export default fp(async function (fastify: FastifyInstance) {
     // register proxy: without onResponse
     fastify.register(fastifyHttpProxy, {
         upstream: 'http://user_management:9001',
+        prefix: '/api/public/nickname',
+        rewritePrefix: '/api/user/public/nickname',
+        http2: false,
+    });
+
+    fastify.register(fastifyHttpProxy, {
+        upstream: 'http://user_management:9001',
         prefix: '/api/login',
         rewritePrefix: '/api/user/login',
         http2: false,
@@ -79,11 +86,28 @@ export default fp(async function (fastify: FastifyInstance) {
 
     fastify.register(fastifyHttpProxy, {
         upstream: 'http://game_service:9002',
+        prefix: '/api/pong',
+        rewritePrefix: '/api/pong',
+        httpMethods: ['POST'],
+        http2: false,
+//        preHandler: async (req, reply) => {
+//          console.log("prehandler pong POST");
+//          console.log(req.headers);
+//        }
+    });
+
+    fastify.register(fastifyHttpProxy, {
+        upstream: 'http://game_service:9002',
         prefix: '/api/pong/game-ws',
         rewritePrefix: '/api/pong/game-ws',
         httpMethods: ['GET'],
         websocket: true,
         http2: false,
+//        preHandler: async (req, reply) => {
+//          console.log("prehandler ws");
+//          console.log(req.headers);
+//          console.log("and the url is: ", req.url);
+//        }
     });
 
     // inject token: for login & token generation after signup
